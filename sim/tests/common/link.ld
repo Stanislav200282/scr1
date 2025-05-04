@@ -26,10 +26,17 @@ SECTIONS {
     SIM_STOP = .;
     LONG(0x6F);
     LONG(-1);
-    . = 0x100;
+    . = 0x770;
     PROVIDE(__TEXT_START__ = .);
     *(.text.init) 
   } >RAM
+
+  text.start 0x1000 :{
+    PROVIDE(__TEXT_END__ = .);
+    PROVIDE(__TEXT_START__ = .);
+    *(.text.start)
+  } >RAM
+
 
   .text  : {
     *crt.o(.text .text.*)
