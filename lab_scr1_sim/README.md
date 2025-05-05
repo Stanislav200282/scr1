@@ -9,3 +9,4 @@ Trap Vector: 0x840
 Output str: "BP"
 
 Upd:Output str: "BP           " because code does not work without spaces, error connected with data length
+Upd2: trap vector address was fixed

@@ -1,6 +1,6 @@
 
-/home/mint/lab_scr1_sim/scr1/build/verilator_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_0/sbreak.elf:     file format elf32-littleriscv
-/home/mint/lab_scr1_sim/scr1/build/verilator_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_0/sbreak.elf
+/home/mint/lab_scr1_sim/scr1/build/verilator_wf_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_1/sbreak.elf:     file format elf32-littleriscv
+/home/mint/lab_scr1_sim/scr1/build/verilator_wf_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_1/sbreak.elf
 architecture: riscv:rv32, flags 0x00000112:
 EXEC_P, HAS_SYMS, D_PAGED
 start address 0x00001000
@@ -13,7 +13,7 @@ Program Header:
 
 Sections:
 Idx Name              Size      VMA       LMA       File off  Algn  Flags
-  0 .text.init        00000836  00000000  00000000  00001000  2**6  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  0 .text.init        000008f6  00000000  00000000  00001000  2**6  CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 text.start        0000006c  00001000  00001000  00002000  2**0  CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .text             000006c0  00001080  00001080  00002080  2**5  CONTENTS, ALLOC, LOAD, READONLY, CODE
   3 .data             00000020  00001740  00001740  00002740  2**4  CONTENTS, ALLOC, LOAD, DATA
@@ -36,15 +36,15 @@ SYMBOL TABLE:
 000017e0 l    d  .bss	00000000 .bss
 0000fc00 l    d  .stack	00000000 .stack
 00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
-00000000 l    df *ABS*	00000000 /home/mint/lab_scr1_sim/scr1/build/verilator_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_0/riscv_objs/sbreak.o
+00000000 l    df *ABS*	00000000 /home/mint/lab_scr1_sim/scr1/build/verilator_wf_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_1/riscv_objs/sbreak.o
 00001700 l       .text	00000000 sc_exit
 00001680 l       .text	00000000 MSG_TRAP
-00000780 l       .text.init	00000000 trap_vector
-000007ca l       .text.init	00000000 _report
-000007a2 l       .text.init	00000000 next_iter
-000007b2 l       .text.init	00000000 break_from_loop
-000007c8 l       .text.init	00000000 handle_exception
-000007c8 l       .text.init	00000000 other_exception
+00000840 l       .text.init	00000000 trap_vector
+0000088a l       .text.init	00000000 _report
+00000862 l       .text.init	00000000 next_iter
+00000872 l       .text.init	00000000 break_from_loop
+00000888 l       .text.init	00000000 handle_exception
+00000888 l       .text.init	00000000 other_exception
 0000169e l       .text	00000000 _run_test
 000016a0 l       .text	00000000 do_break
 000016a8 l       .text	00000000 fail
@@ -80,52 +80,52 @@ Disassembly of section .text.init:
   fe:	ffff                	0xffff
 	...
 
-00000780 <trap_vector>:
- 780:	34202773          	csrr	a4,mcause
- 784:	47a1                	li	a5,8
- 786:	04f70263          	beq	a4,a5,7ca <_report>
- 78a:	47a5                	li	a5,9
- 78c:	02f70f63          	beq	a4,a5,7ca <_report>
- 790:	47ad                	li	a5,11
- 792:	02f70c63          	beq	a4,a5,7ca <_report>
- 796:	f0000837          	lui	a6,0xf0000
- 79a:	00001897          	auipc	a7,0x1
- 79e:	ee688893          	addi	a7,a7,-282 # 1680 <MSG_TRAP>
+00000840 <trap_vector>:
+ 840:	34202773          	csrr	a4,mcause
+ 844:	47a1                	li	a5,8
+ 846:	04f70263          	beq	a4,a5,88a <_report>
+ 84a:	47a5                	li	a5,9
+ 84c:	02f70f63          	beq	a4,a5,88a <_report>
+ 850:	47ad                	li	a5,11
+ 852:	02f70c63          	beq	a4,a5,88a <_report>
+ 856:	f0000837          	lui	a6,0xf0000
+ 85a:	00001897          	auipc	a7,0x1
+ 85e:	e2688893          	addi	a7,a7,-474 # 1680 <MSG_TRAP>
 
-000007a2 <next_iter>:
- 7a2:	00088783          	lb	a5,0(a7)
- 7a6:	c791                	beqz	a5,7b2 <break_from_loop>
- 7a8:	00f82023          	sw	a5,0(a6) # f0000000 <__global_pointer$+0xefffe038>
- 7ac:	0885                	addi	a7,a7,1
- 7ae:	ff5ff06f          	j	7a2 <next_iter>
+00000862 <next_iter>:
+ 862:	00088783          	lb	a5,0(a7)
+ 866:	c791                	beqz	a5,872 <break_from_loop>
+ 868:	00f82023          	sw	a5,0(a6) # f0000000 <__global_pointer$+0xefffe038>
+ 86c:	0885                	addi	a7,a7,1
+ 86e:	ff5ff06f          	j	862 <next_iter>
 
-000007b2 <break_from_loop>:
- 7b2:	00001717          	auipc	a4,0x1
- 7b6:	f0e70713          	addi	a4,a4,-242 # 16c0 <mtvec_handler>
- 7ba:	c311                	beqz	a4,7be <break_from_loop+0xc>
- 7bc:	8702                	jr	a4
- 7be:	34202773          	csrr	a4,mcause
- 7c2:	00075363          	bgez	a4,7c8 <handle_exception>
- 7c6:	a009                	j	7c8 <handle_exception>
+00000872 <break_from_loop>:
+ 872:	00001717          	auipc	a4,0x1
+ 876:	e4e70713          	addi	a4,a4,-434 # 16c0 <mtvec_handler>
+ 87a:	c311                	beqz	a4,87e <break_from_loop+0xc>
+ 87c:	8702                	jr	a4
+ 87e:	34202773          	csrr	a4,mcause
+ 882:	00075363          	bgez	a4,888 <handle_exception>
+ 886:	a009                	j	888 <handle_exception>
 
-000007c8 <handle_exception>:
- 7c8:	4505                	li	a0,1
+00000888 <handle_exception>:
+ 888:	4505                	li	a0,1
 
-000007ca <_report>:
- 7ca:	7370006f          	j	1700 <sc_exit>
- 7ce:	00000013          	nop
- 7d2:	00000013          	nop
- 7d6:	00000013          	nop
- 7da:	00000013          	nop
- 7de:	00000013          	nop
- 7e2:	00000013          	nop
- 7e6:	00000013          	nop
- 7ea:	00000013          	nop
- 7ee:	00000013          	nop
- 7f2:	00000013          	nop
- 7f6:	00000013          	nop
- 7fa:	00000013          	nop
- 7fe:	0001                	nop
+0000088a <_report>:
+ 88a:	6770006f          	j	1700 <sc_exit>
+ 88e:	00000013          	nop
+ 892:	00000013          	nop
+ 896:	00000013          	nop
+ 89a:	00000013          	nop
+ 89e:	00000013          	nop
+ 8a2:	00000013          	nop
+ 8a6:	00000013          	nop
+ 8aa:	00000013          	nop
+ 8ae:	00000013          	nop
+ 8b2:	00000013          	nop
+ 8b6:	00000013          	nop
+ 8ba:	00000013          	nop
+ 8be:	0001                	nop
 	...
 
 Disassembly of section text.start:
@@ -134,8 +134,8 @@ Disassembly of section text.start:
     1000:	f1402573          	csrr	a0,mhartid
     1004:	e101                	bnez	a0,1004 <_start+0x4>
     1006:	4e01                	li	t3,0
-    1008:	fffff297          	auipc	t0,0xfffff
-    100c:	77828293          	addi	t0,t0,1912 # 780 <trap_vector>
+    1008:	00000297          	auipc	t0,0x0
+    100c:	83828293          	addi	t0,t0,-1992 # 840 <trap_vector>
     1010:	30529073          	csrw	mtvec,t0
     1014:	4505                	li	a0,1
     1016:	057e                	slli	a0,a0,0x1f
@@ -152,7 +152,7 @@ Disassembly of section text.start:
     103a:	30229073          	csrw	medeleg,t0
     103e:	30202373          	csrr	t1,medeleg
     1042:	00628463          	beq	t0,t1,104a <_start+0x4a>
-    1046:	f82ff06f          	j	7c8 <handle_exception>
+    1046:	843ff06f          	j	888 <handle_exception>
     104a:	30005073          	csrwi	mstatus,0
     104e:	6509                	lui	a0,0x2
     1050:	80050513          	addi	a0,a0,-2048 # 1800 <_end+0x20>
